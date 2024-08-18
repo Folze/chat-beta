@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/styles.css" />
+    <link rel="stylesheet" href="./css/modal.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="chat">
+      <div class="container">
+        <header>
+          <div class="header__body">
+            <div class="header__button">
+              <button class="header__button__authorization">Авторизация</button>
+              <button class="header__button__settings">Настройки</button>
+              <button class="header__button__quit">Выйти</button>
+            </div>
+          </div>
+        </header>
+        <main>
+          <div class="chat__container">
+            <div class="chat__body">
+              <template id="message">
+                <div class="message">
+                  <div class="content__message">
+                    <div class="nickname"></div>
+                    <div class="text"></div>
+                  </div>
+                </div>
+              </template>
+            </div>
+          </div>
+        </main>
+        <section>
+          <div class="chat__send">
+          <form class="chat__send__form">
+              <input type="text" placeholder="сообщение.." class="chat__send__message"/>
+              <button class="chat__btn__send">></button>
+          </form>
+        </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- Ввод почты -->
+    <div class="modal__authorization">
+      <div class="modal__overlay"></div>
+      <div class="modal">
+        <div class="modal__header">
+          <h2>Авторизация</h2>
+          <span class="modal__close" id="modal__close">&times;</span>  
+        </div>
+        <div class="modal__body">
+          <p>Почта:</p>
+          <input class="modal__input"/>
+          <div class="modal__button">
+            <button class="modal__get__code">Получить код</button>
+            <button id="enter-code">Ввести код</button>
+          </div>
+        </div>
+      </div>
+</div>
+
+<div class="modal__accept"> 
+  <div class="modal__second__overlay"></div>
+  <div class="modal__second">
+    <div class="modal__second__header">
+      <h2>Подтверждение</h2>
+      <span class="modal__second__close" id="modal__second__close">&times;</span>  
+    </div>
+    <div class="modal__second__body">
+<p>Код:</p>
+<input class="modal__second__input" placeholder="введите код"/>
+    </div>
+    <div class="modal__second__button">
+      <button class="modal__welcome__button">Войти</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal__SET"> 
+  <div class="modal__settings__overlay"></div>
+  <div class="modal__settings">
+    <div class="modal__settings__header">
+      <h2>Настройки</h2>
+      <span class="modal__settings__close" id="modal__settings__close">&times;</span>  
+    </div>
+    <div class="modal__settings__body">
+<p>Имя в чате</p>
+<input class="modal__settings__input" placeholder="введите имя"/>
+    </div>
+      <div class="modal__settings__button">
+        <button class="modal__settings__btn">Подтвердить</button>
+    </div>
+  </div>
+</div>
+
+
+
+</div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+    <script src="./script.js" type="module" defer></script>
+    
+  </body>
+</html>
+

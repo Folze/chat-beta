@@ -1,0 +1,75 @@
+/* Общие стили для модальных окон */
+.modal__overlay,
+.modal__second__overlay,
+.modal__settings__overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: none;
+  z-index: 10;
+}
+
+.modal__authorization,
+.modal__accept,
+.modal__SET {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 50px;
+}
+
+.modal,
+.modal__second,
+.modal__settings {
+  background-color: burlywood;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  display: none;
+  z-index: 11;
+  padding: 75px 25px 75px 25px;
+}
+
+.modal__header,
+.modal__second__header,
+.modal__settings__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.modal__close,
+.modal__second__close,
+.modal__settings__close {
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.modal__input,
+.modal__second__input,
+.modal__settings__input {
+  margin-bottom: 10px;
+}
+
+.modal__button button,
+.modal__second__button,
+.modal__settings__button {
+  background: none;
+  border-radius: 4px;
+  background-color: #fff;
+  padding: 10px;
+  cursor: pointer;
+}
+
+/* Активные состояния модальных окон */
+.modal__active .modal,
+.modal__active .modal__overlay {
+  display: block;
+}
