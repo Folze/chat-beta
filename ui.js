@@ -30,4 +30,10 @@ const UI = {
   template: getElement("#message"),
 };
 
+if (!UI.template) {
+  console.error(
+    "Шаблон сообщения не найден. Проверьте наличие элемента с id 'message' в вашем HTML."
+  );
+}
+
 export { UI };

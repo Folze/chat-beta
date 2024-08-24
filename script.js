@@ -1,22 +1,33 @@
 import { UI } from "./ui.js";
 import Cookies from "js-cookie";
 
-function addMessage() {
-  const message = UI.messageInput.value.trim();
-  if (message === "") return;
+function renderMessage(message, username, isOutgo) {
   const messageClone = UI.template.content.cloneNode(true);
   const nicknameDiv = messageClone.querySelector(".nickname");
   const textDiv = messageClone.querySelector(".text");
+  const messageDiv = messageClone.querySelector("div");
 
-  // Nick,Content
-  nicknameDiv.textContent = getToken("username") || "Anon";
+  nicknameDiv.textContent = username;
   textDiv.textContent = message;
-  // class
-  nicknameDiv.classList.add("nickname");
-  textDiv.classList.add("text");
-  //
+
+  if (isOutgo === savedToken) {
+    messageDiv.classList.add("person1");
+  } else {
+    messageDiv.classList.add("person2");
+  }
+
   UI.chatBody.appendChild(messageClone);
+
   UI.messageInput.value = "";
+}
+
+function sendMessage() {
+  const message = UI.messageInput.value.trim();
+  if (message === "") return;
+
+  const username = getToken("username") || "Anonim";
+
+  renderMessage(message, username, savedToken);
 }
 
 function toggleModal(modal, overlay, isVisible) {
@@ -54,7 +65,6 @@ function fetchEmailRequest(email) {
 }
 
 function fetchUserInfo(newName) {
-  const token = getToken("authToken");
   if (!token) {
     console.error("Token not found");
     return;
@@ -69,11 +79,44 @@ function fetchUserInfo(newName) {
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log("Username updated:", data);
-      Cookies.set("username", newName, { expires: 7 });
+      if (data.name === getToken("username")) {
+        console.log("Это текущее ваше имя");
+        // Потом добавить в html
+      } else {
+        console.log("Username updated:", data);
+        Cookies.set("username", newName, { expires: 7 });
+      }
     })
     .catch((error) => {
       console.error("Error:", error);
+    });
+}
+
+function fetchChatHistory() {
+  const token = getToken("authToken");
+  if (!token) {
+    console.error("Token not found");
+    return;
+  }
+
+  fetch("https://edu.strada.one/api/messages/", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+      if (Array.isArray(data.messages)) {
+        data.messages.forEach((message) => {
+          renderMessage(message.text, message.user.name, message._id);
+        });
+      }
+    })
+    .catch((error) => {
+      console.error("Error fetching chat history:", error);
     });
 }
 // Установка куки
@@ -86,11 +129,13 @@ function getToken(token) {
   return Cookies.get(token);
 }
 
+const savedToken = getToken("authToken");
+
 // События
 
 UI.form.addEventListener("submit", (event) => {
   event.preventDefault();
-  addMessage();
+  sendMessage();
 });
 
 // 1 modal
@@ -155,4 +200,8 @@ UI.modalSettingsBtn.addEventListener("click", (event) => {
   setTimeout(() => {
     toggleModal(UI.modalSettings, UI.modalSettingsOverlay, false);
   }, 200);
+});
+
+window.addEventListener("load", () => {
+  fetchChatHistory();
 });

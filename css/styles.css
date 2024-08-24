@@ -47,13 +47,13 @@
 }
 
 .person1 {
-  background-color: #e5e5e5;
-  align-self: flex-start;
+  background-color: #f6f6f6;
+  align-self: flex-end;
 }
 
 .person2 {
-  background-color: #f6f6f6;
-  align-self: flex-end;
+  background-color: #e5e5e5;
+  align-self: flex-start;
 }
 /*  */
 
@@ -89,7 +89,7 @@
 
 .content__message {
   padding: 8px;
-  background-color: #f6f6f6;
+  /* background-color: #f6f6f6; */
   border-radius: 3px;
 }
 
