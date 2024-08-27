@@ -23,7 +23,7 @@
 65C:\Users\thefo\Desktop\chat\node_modules\abortcontroller-polyfill133683792406616059 1
 74C:\Users\thefo\Desktop\chat\node_modules\weak-lru-cache\tests\benchmark.js133683792404504133 0
 78C:\Users\thefo\Desktop\chat\node_modules\posthtml\node_modules\posthtml-parser133683792405475026 1
-32C:\Users\thefo\Desktop\chat\dist133690055408546725 1
+32C:\Users\thefo\Desktop\chat\dist133692525713321253 1
 65C:\Users\thefo\Desktop\chat\node_modules\@parcel\watcher\index.js133683792404624242 0
 76C:\Users\thefo\Desktop\chat\node_modules\source-map\dist\source-map.debug.js133683792407546900 0
 58C:\Users\thefo\Desktop\chat\node_modules\lmdb\src\misc.cpp133683792410019143 0
@@ -97,7 +97,7 @@
 61C:\Users\thefo\Desktop\chat\node_modules\semver\ranges\gtr.js133683792423388426 0
 64C:\Users\thefo\Desktop\chat\node_modules\semver\functions\cmp.js133683792423318370 0
 59C:\Users\thefo\Desktop\chat\node_modules\micromatch\LICENSE133683792404133796 0
-37C:\Users\thefo\Desktop\chat\script.js133690056742979953 0
+37C:\Users\thefo\Desktop\chat\script.js133692525713161109 0
 61C:\Users\thefo\Desktop\chat\node_modules\json5\lib\parse.d.ts133683792407056455 0
 72C:\Users\thefo\Desktop\chat\node_modules\caniuse-lite\data\regions\YT.js133683792415394031 0
 70C:\Users\thefo\Desktop\chat\node_modules\svgo\plugins\removeViewBox.js133683792409929059 0
@@ -112,7 +112,7 @@
 69C:\Users\thefo\Desktop\chat\node_modules\svgo\plugins\_collections.js133683792408427696 0
 98C:\Users\thefo\Desktop\chat\node_modules\lmdb\dependencies\lmdb-data-v1\libraries\liblmdb\mtest3.c133683792409528695 0
 72C:\Users\thefo\Desktop\chat\node_modules\caniuse-lite\data\regions\SH.js133683792414242979 0
-51C:\Users\thefo\Desktop\chat\dist\index.9bfebdba.css133690051842426220 0
+51C:\Users\thefo\Desktop\chat\dist\index.9bfebdba.css133692474913170392 0
 47C:\Users\thefo\Desktop\chat\node_modules\braces133683792406125606 1
 67C:\Users\thefo\Desktop\chat\node_modules\@swc\helpers\cjs\index.cjs133683792410039161 0
 71C:\Users\thefo\Desktop\chat\node_modules\@parcel\core\lib\loadDotEnv.js133683792409949089 0
@@ -1338,7 +1338,7 @@
 104C:\Users\thefo\Desktop\chat\node_modules\@parcel\optimizer-svgo\node_modules\css-tree\lib\lexer\Lexer.js133683792409678838 0
 90C:\Users\thefo\Desktop\chat\node_modules\@parcel\package-manager\src\promiseFromProcess.js133683792407987303 0
 69C:\Users\thefo\Desktop\chat\node_modules\source-map\lib\quick-sort.js133683792406165648 0
-55C:\Users\thefo\Desktop\chat\dist\index.cbd24e16.css.map133690051842436227 0
+55C:\Users\thefo\Desktop\chat\dist\index.cbd24e16.css.map133692474912409703 0
 77C:\Users\thefo\Desktop\chat\node_modules\css-tree\lib\syntax\scope\default.js133683792411060093 0
 74C:\Users\thefo\Desktop\chat\node_modules\css-tree\cjs\convertor\create.cjs133683792407566917 0
 75C:\Users\thefo\Desktop\chat\node_modules\@parcel\core\src\serializerCore.js133683792410809860 0
@@ -3264,7 +3264,7 @@
 68C:\Users\thefo\Desktop\chat\node_modules\@parcel\transformer-css\src133683792404754361 1
 73C:\Users\thefo\Desktop\chat\node_modules\css-tree\lib\convertor\create.js133683792410849896 0
 87C:\Users\thefo\Desktop\chat\node_modules\css-select\node_modules\domhandler\lib\node.js133683792405575107 0
-55C:\Users\thefo\Desktop\chat\dist\index.748ad148.css.map133690051842416213 0
+55C:\Users\thefo\Desktop\chat\dist\index.748ad148.css.map133692474913120348 0
 50C:\Users\thefo\Desktop\chat\node_modules\.bin\svgo133683792550598855 0
 76C:\Users\thefo\Desktop\chat\node_modules\@parcel\transformer-js\package.json133683792405735254 0
 65C:\Users\thefo\Desktop\chat\node_modules\css-tree\dist\csstree.js133683792410990023 0
@@ -4822,7 +4822,7 @@
 73C:\Users\thefo\Desktop\chat\node_modules\@parcel\utils\src\relativeUrl.js133683792409378561 0
 85C:\Users\thefo\Desktop\chat\node_modules\@parcel\utils\src\replaceBundleReferences.js133683792409408589 0
 75C:\Users\thefo\Desktop\chat\node_modules\@parcel\utils\src\shared-buffer.js133683792409508679 0
-50C:\Users\thefo\Desktop\chat\dist\index.8cfc62b9.js133690055408526705 0
+50C:\Users\thefo\Desktop\chat\dist\index.8cfc62b9.js133692525713291218 0
 71C:\Users\thefo\Desktop\chat\node_modules\@parcel\utils\src\sourcemap.js133683792409548717 0
 84C:\Users\thefo\Desktop\chat\node_modules\@parcel\optimizer-svgo\src\SVGOOptimizer.js133683792404814416 0
 68C:\Users\thefo\Desktop\chat\node_modules\@parcel\utils\src\stream.js133683792409618779 0
@@ -5899,8 +5899,8 @@
 56C:\Users\thefo\Desktop\chat\node_modules\.bin\semver.ps1133683792550598855 0
 72C:\Users\thefo\Desktop\chat\node_modules\.bin\update-browserslist-db.ps1133683792550598855 0
 41C:\Users\thefo\Desktop\chat\css\modal.css133682147895989603 0
-51C:\Users\thefo\Desktop\chat\dist\index.748ad148.css133690051842366174 0
-43C:\Users\thefo\Desktop\chat\dist\index.html133690051842406204 0
-51C:\Users\thefo\Desktop\chat\dist\index.cbd24e16.css133690051842416213 0
-55C:\Users\thefo\Desktop\chat\dist\index.9bfebdba.css.map133690051842456248 0
-54C:\Users\thefo\Desktop\chat\dist\index.8cfc62b9.js.map133690055408546725 0
+43C:\Users\thefo\Desktop\chat\dist\index.html133692474912379676 0
+51C:\Users\thefo\Desktop\chat\dist\index.cbd24e16.css133692474912379676 0
+51C:\Users\thefo\Desktop\chat\dist\index.748ad148.css133692474913100330 0
+55C:\Users\thefo\Desktop\chat\dist\index.9bfebdba.css.map133692474913180402 0
+54C:\Users\thefo\Desktop\chat\dist\index.8cfc62b9.js.map133692525713311236 0

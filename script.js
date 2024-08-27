@@ -1,7 +1,7 @@
 import { UI } from "./ui.js";
 import Cookies from "js-cookie";
 
-function renderMessage(message, username, isOutgo) {
+function renderMessage(message, username) {
   const messageClone = UI.template.content.cloneNode(true);
   const nicknameDiv = messageClone.querySelector(".nickname");
   const textDiv = messageClone.querySelector(".text");
@@ -10,11 +10,8 @@ function renderMessage(message, username, isOutgo) {
   nicknameDiv.textContent = username;
   textDiv.textContent = message;
 
-  if (isOutgo === savedToken) {
-    messageDiv.classList.add("person1");
-  } else {
-    messageDiv.classList.add("person2");
-  }
+  const isOutgoingMessage = username === getToken("username");
+  messageDiv.classList.add(isOutgoingMessage ? "person1" : "person2");
 
   UI.chatBody.appendChild(messageClone);
 
@@ -27,7 +24,8 @@ function sendMessage() {
 
   const username = getToken("username") || "Anonim";
 
-  renderMessage(message, username, savedToken);
+  renderMessage(message, username);
+  socket.send(JSON.stringify({ text: message }));
 }
 
 function toggleModal(modal, overlay, isVisible) {
@@ -65,6 +63,7 @@ function fetchEmailRequest(email) {
 }
 
 function fetchUserInfo(newName) {
+  const token = getToken("authToken");
   if (!token) {
     console.error("Token not found");
     return;
@@ -110,8 +109,8 @@ function fetchChatHistory() {
     .then((data) => {
       console.log(data);
       if (Array.isArray(data.messages)) {
-        data.messages.forEach((message) => {
-          renderMessage(message.text, message.user.name, message._id);
+        data.messages.reverse().forEach((message) => {
+          renderMessage(message.text, message.user.name);
         });
       }
     })
@@ -131,6 +130,20 @@ function getToken(token) {
 
 const savedToken = getToken("authToken");
 
+const socket = new WebSocket(`wss://edu.strada.one/websockets?${savedToken}`);
+
+socket.onopen = function (event) {
+  console.log("WebSocket соединение установлено");
+};
+
+socket.onmessage = function (event) {
+  const data = JSON.parse(event.data);
+  const username = getToken("username");
+
+  if (data.user.name !== username) {
+    renderMessage(data.text, data.user.name);
+  }
+};
 // События
 
 UI.form.addEventListener("submit", (event) => {
@@ -204,4 +217,10 @@ UI.modalSettingsBtn.addEventListener("click", (event) => {
 
 window.addEventListener("load", () => {
   fetchChatHistory();
+});
+
+window.addEventListener("scroll", function () {
+  const scrollPosition =
+    window.pageYOffset || document.documentElement.scrollTop;
+  console.log("Текущая прокрутка страницы:", scrollPosition);
 });
