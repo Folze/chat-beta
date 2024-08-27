@@ -124,6 +124,7 @@ function saveToken(token) {
   Cookies.set("authToken", token, { expires: 7 });
 }
 
+//
 function getToken(token) {
   return Cookies.get(token);
 }
