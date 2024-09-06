@@ -30,12 +30,13 @@
   margin: 10px;
   padding: 10px;
   min-height: 500px;
-  overflow-y: auto; /* Прокрутка, если содержимое превышает высоту */
 }
 
 .chat__body {
   display: flex;
   flex-direction: column;
+  height: 1000px;
+  overflow-y: auto;
 }
 
 .person1,

@@ -18,6 +18,21 @@ function renderMessage(message, username) {
   UI.messageInput.value = "";
 }
 
+function renderLoadedMessage(message, username) {
+  const messageClone = UI.template.content.cloneNode(true);
+  const nicknameDiv = messageClone.querySelector(".nickname");
+  const textDiv = messageClone.querySelector(".text");
+  const messageDiv = messageClone.querySelector("div");
+
+  nicknameDiv.textContent = username;
+  textDiv.textContent = message;
+
+  const isOutgoingMessage = username === getToken("username");
+  messageDiv.classList.add(isOutgoingMessage ? "person1" : "person2");
+
+  UI.chatBody.prepend(messageClone);
+}
+
 function sendMessage() {
   const message = UI.messageInput.value.trim();
   if (message === "") return;
@@ -26,6 +41,7 @@ function sendMessage() {
 
   renderMessage(message, username);
   socket.send(JSON.stringify({ text: message }));
+  scrollToBottom();
 }
 
 function toggleModal(modal, overlay, isVisible) {
@@ -36,6 +52,10 @@ function toggleModal(modal, overlay, isVisible) {
     modal.style.display = "none";
     overlay.style.display = "none";
   }
+}
+
+function scrollToBottom() {
+  UI.chatBody.scrollTop = UI.chatBody.scrollHeight;
 }
 
 function fetchEmailRequest(email) {
@@ -107,21 +127,65 @@ function fetchChatHistory() {
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
       if (Array.isArray(data.messages)) {
-        data.messages.reverse().forEach((message) => {
-          renderMessage(message.text, message.user.name);
-        });
+        localStorage.setItem("chatHistory", JSON.stringify(data.messages));
+        displayInitialMessages();
+        scrollToBottom();
       }
     })
     .catch((error) => {
       console.error("Error fetching chat history:", error);
     });
 }
+
+let displayedMessages = 20;
+
+function displayInitialMessages() {
+  let check = localStorage.getItem("chatHistory");
+  const parsedData = JSON.parse(check);
+  const initialMessages = parsedData.slice(0, displayedMessages).reverse();
+
+  initialMessages.forEach((message) => {
+    renderMessage(message.text, message.user.name);
+  });
+}
+
+function loadMoreMessages() {
+  // Сохранение текущей позиции прокрутки
+  const oldScrollHeight = UI.chatBody.scrollHeight;
+  const oldScrollTop = UI.chatBody.scrollTop;
+
+  let check = localStorage.getItem("chatHistory");
+  const parsedData = JSON.parse(check);
+  const remainingMessages = parsedData.length - displayedMessages;
+  if (remainingMessages <= 0) {
+    console.log("Вся история загружена");
+    return;
+  }
+
+  const messagesToAdd = Math.min(20, remainingMessages);
+  const nextMessages = parsedData.slice(
+    displayedMessages,
+    displayedMessages + messagesToAdd
+  );
+
+  // Добавляем новые сообщения
+  nextMessages
+    .reverse()
+    .forEach((message) => renderLoadedMessage(message.text, message.user.name));
+
+  // Увеличиваем количество отображаемых сообщений
+  displayedMessages += messagesToAdd;
+
+  // Корректировка позиции прокрутки
+  const newScrollHeight = UI.chatBody.scrollHeight;
+  UI.chatBody.scrollTop = oldScrollTop + (newScrollHeight - oldScrollHeight);
+}
+
 // Установка куки
 
 function saveToken(token) {
-  Cookies.set("authToken", token, { expires: 7 });
+  Cookies.set("authToken", token, { expires: 14 });
 }
 
 //
@@ -142,7 +206,7 @@ socket.onmessage = function (event) {
   const username = getToken("username");
 
   if (data.user.name !== username) {
-    renderMessage(data.text, data.user.name);
+    renderLoadedMessage(data.text, data.user.name);
   }
 };
 // События
@@ -220,8 +284,8 @@ window.addEventListener("load", () => {
   fetchChatHistory();
 });
 
-window.addEventListener("scroll", function () {
-  const scrollPosition =
-    window.pageYOffset || document.documentElement.scrollTop;
-  console.log("Текущая прокрутка страницы:", scrollPosition);
+UI.chatBody.addEventListener("scroll", function () {
+  if (UI.chatBody.scrollTop === 0) {
+    loadMoreMessages();
+  }
 });
