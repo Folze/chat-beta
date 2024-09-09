@@ -2,6 +2,8 @@ import { getToken } from "./localCookie";
 import { renderMessage } from "./chat";
 import { scrollToBottom } from "./scroll";
 import { UI } from "./ui";
+import { renderLoadedMessage } from "./chat";
+import { toggleModal } from "../main";
 
 let displayedMessages = 20;
 
@@ -13,6 +15,38 @@ export function displayInitialMessages() {
   initialMessages.forEach((message) => {
     renderMessage(message.text, message.user.name);
   });
+}
+
+export function loadMoreMessages() {
+  // Сохранение текущей позиции прокрутки
+  const oldScrollHeight = UI.chatBody.scrollHeight;
+  const oldScrollTop = UI.chatBody.scrollTop;
+
+  let check = localStorage.getItem("chatHistory");
+  const parsedData = JSON.parse(check);
+  const remainingMessages = parsedData.length - displayedMessages;
+  if (remainingMessages <= 0) {
+    console.log("Вся история загружена");
+    return;
+  }
+
+  const messagesToAdd = Math.min(20, remainingMessages);
+  const nextMessages = parsedData.slice(
+    displayedMessages,
+    displayedMessages + messagesToAdd
+  );
+
+  // Добавляем новые сообщения
+  nextMessages
+    .reverse()
+    .forEach((message) => renderLoadedMessage(message.text, message.user.name));
+
+  // Увеличиваем количество отображаемых сообщений
+  displayedMessages += messagesToAdd;
+
+  // Корректировка позиции прокрутки
+  const newScrollHeight = UI.chatBody.scrollHeight;
+  UI.chatBody.scrollTop = oldScrollTop + (newScrollHeight - oldScrollHeight);
 }
 
 export function fetchEmailRequest(email) {

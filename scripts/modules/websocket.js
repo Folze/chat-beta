@@ -1,11 +1,12 @@
 import { savedToken } from "./localCookie";
+import { getToken } from "./localCookie";
+import { renderLoadedMessage } from "./chat";
+
+let socket;
 
 export function connectWebSocket(token) {
   try {
-    const socket = new WebSocket(
-      `wss://edu.strada.one/websockets?${savedToken}`
-    );
-
+    socket = new WebSocket(`wss://edu.strada.one/websockets?${savedToken}`);
     socket.onopen = function (event) {
       console.log("WebSocket соединение установлено");
     };
@@ -22,3 +23,5 @@ export function connectWebSocket(token) {
     console.error("Ошибка при подключении к WebSocket:", error);
   }
 }
+
+export { socket };

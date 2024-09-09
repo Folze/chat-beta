@@ -1,14 +1,15 @@
 import { UI } from "./modules/ui.js";
 import { connectWebSocket } from "./modules/websocket.js";
 import { saveToken, getToken } from "./modules/localCookie.js";
-import { renderLoadedMessage, sendMessage } from "./modules/chat.js";
+import { sendMessage } from "./modules/chat.js";
 import {
   fetchEmailRequest,
   fetchUserInfo,
   fetchChatHistory,
+  loadMoreMessages,
 } from "./modules/api.js";
 
-function toggleModal(modal, overlay, isVisible) {
+export function toggleModal(modal, overlay, isVisible) {
   if (isVisible) {
     modal.style.display = "block";
     overlay.style.display = "block";
@@ -16,38 +17,6 @@ function toggleModal(modal, overlay, isVisible) {
     modal.style.display = "none";
     overlay.style.display = "none";
   }
-}
-
-function loadMoreMessages() {
-  // Сохранение текущей позиции прокрутки
-  const oldScrollHeight = UI.chatBody.scrollHeight;
-  const oldScrollTop = UI.chatBody.scrollTop;
-
-  let check = localStorage.getItem("chatHistory");
-  const parsedData = JSON.parse(check);
-  const remainingMessages = parsedData.length - displayedMessages;
-  if (remainingMessages <= 0) {
-    console.log("Вся история загружена");
-    return;
-  }
-
-  const messagesToAdd = Math.min(20, remainingMessages);
-  const nextMessages = parsedData.slice(
-    displayedMessages,
-    displayedMessages + messagesToAdd
-  );
-
-  // Добавляем новые сообщения
-  nextMessages
-    .reverse()
-    .forEach((message) => renderLoadedMessage(message.text, message.user.name));
-
-  // Увеличиваем количество отображаемых сообщений
-  displayedMessages += messagesToAdd;
-
-  // Корректировка позиции прокрутки
-  const newScrollHeight = UI.chatBody.scrollHeight;
-  UI.chatBody.scrollTop = oldScrollTop + (newScrollHeight - oldScrollHeight);
 }
 
 // События

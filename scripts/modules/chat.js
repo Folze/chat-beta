@@ -1,5 +1,7 @@
 import { UI } from "./ui";
 import { getToken } from "./localCookie";
+import { scrollToBottom } from "./scroll";
+import { socket } from "./websocket";
 
 export function renderMessage(message, username) {
   const messageClone = UI.template.content.cloneNode(true);
