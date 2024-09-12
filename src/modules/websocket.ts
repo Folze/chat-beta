@@ -4,7 +4,7 @@ import { renderLoadedMessage } from "./chat";
 
 let socket;
 
-export function connectWebSocket(token) {
+export function connectWebSocket() {
   try {
     socket = new WebSocket(`wss://edu.strada.one/websockets?${savedToken}`);
     socket.onopen = function (event) {

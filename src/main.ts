@@ -106,6 +106,5 @@ document.addEventListener("DOMContentLoaded", () => {
   const token = getToken("authToken");
   if (token) {
     connectWebSocket();
-    // fetchChatHistory();
   }
 });

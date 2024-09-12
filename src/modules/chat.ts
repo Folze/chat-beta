@@ -3,7 +3,7 @@ import { getToken } from "./localCookie";
 import { scrollToBottom } from "./scroll";
 import { socket } from "./websocket";
 
-export function renderMessage(message, username) {
+export function renderMessage(message: string, username: string) {
   const messageClone = UI.template.content.cloneNode(true);
   const nicknameDiv = messageClone.querySelector(".nickname");
   const textDiv = messageClone.querySelector(".text");
@@ -20,7 +20,7 @@ export function renderMessage(message, username) {
   UI.messageInput.value = "";
 }
 
-export function renderLoadedMessage(message, username) {
+export function renderLoadedMessage(message: string, username: string) {
   const messageClone = UI.template.content.cloneNode(true);
   const nicknameDiv = messageClone.querySelector(".nickname");
   const textDiv = messageClone.querySelector(".text");

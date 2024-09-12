@@ -1,3 +1,5 @@
+import Cookies from "js-cookie";
+
 export function saveToken(token) {
   Cookies.set("authToken", token, { expires: 14 });
 }
